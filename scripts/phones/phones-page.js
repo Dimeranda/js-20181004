@@ -4,6 +4,7 @@ import PhoneCatalog from './components/phone-catalog.js';
 import PhoneViewer from './components/phone-viewer.js';
 import ShoppingCart from './components/shopping-cart.js';
 import PhoneService from './phone-service.js';
+import SortBy from "./components/sort.js";
 
 export default class PhonesPage {
   constructor({ element }) {
@@ -14,6 +15,7 @@ export default class PhonesPage {
     this._initCatalog();
     this._initViewer();
     this._initShoppingCart();
+    this._initSortBy();
   }
 
   _initCatalog() {
@@ -55,13 +57,19 @@ export default class PhonesPage {
     });
   }
 
+  _initSortBy() {
+    this._cart = new SortBy({
+      element: document.querySelector('[data-component="sort-by"]'),
+    });
+  }
+
   _render() {
     this._element.innerHTML = `
       <div class="row">
   
         <!--Sidebar-->
         <div class="col-md-2">
-          <section>
+          <section data-element = "sort-by">
             <p>
               Search:
               <input>
