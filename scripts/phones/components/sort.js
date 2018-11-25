@@ -1,4 +1,5 @@
 import Component from '../../component.js'
+import PhonesPage from "../phones-page.js";
 
 export default class SortBy extends Component {
     constructor({ element, phones }) {
@@ -9,6 +10,10 @@ export default class SortBy extends Component {
             let value = this._element.value;
             this.sort(value, phones);
         });
+
+        this._sortValue = document.querySelector('[data-element="sort-value"]').value();
+        this._sort(this._sortValue, phones);
+        this._render();
     }
 
     sort(value ,phones){
@@ -22,42 +27,9 @@ export default class SortBy extends Component {
                 if(phone1 > phone2) { return 1; }
                 return 0;})
         }
-    }
-    add(itemId) {
-        if (!this._items[itemId]) {
-            this._items[itemId] = 0;
-        }
-
-        this._items[itemId] += 1;
-
-        this._render();
-    }
-
-    remove(itemId) {
-        this._items[itemId] -= 1;
-
-        if (this._items[itemId] === 0) {
-            delete this._items[itemId];
-        }
-
-        this._render();
-    }
+    };
 
     _render() {
-        this._element.innerHTML = `
-      <section>
-        <h3>Shopping Cart</h3>
-        <ul>
-          ${ Object.entries(this._items).map(([id, quantity]) => `
-
-            <li data-element="item" data-item-id="${ id }">
-              ${ id } (${ quantity })
-              <button data-element="remove-button">x</button>
-            </li>
-            
-          `).join('')}
-        </ul>
-      </section>
-    `;
+        new PhonesPage({element: document.querySelector('[data-page-container]'),});
     }
-}
+ }

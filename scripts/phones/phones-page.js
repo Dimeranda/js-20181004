@@ -77,7 +77,7 @@ export default class PhonesPage {
     
             <p>
               Sort by:
-              <select>
+              <select data-element="sort-value">
                 <option value="name">Alphabetical</option>
                 <option value="age">Newest</option>
               </select>
